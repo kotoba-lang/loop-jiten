@@ -1,0 +1,336 @@
+[{:jiten.entry/id :entry/kotobase,
+  :jiten.entry/title "kotobase",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/kotobase in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-registered,
+      :jiten.statement/text
+      "`kotobase` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/kotobase`, pinned at commit `e0cce0f336ad`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/kotobase-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/kotobase` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/kotobase, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-adr-1,
+      :jiten.statement/text
+      "ADR-2607265000 (status: accepted, 2026-07-26) records: ADR-2607265000: D1-backed Kotobase は Datomic の EDN 文法をそのまま公開する — 文法・引数順は互換、wire は非互換",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607265000-kotobase-d1-datomic-edn-api.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/kotobase-adr-2,
+      :jiten.statement/text
+      "ADR-2607032500 (status: accepted, 2026-07-03) records: ADR-2607032500: kotoba : kotobase = Clojure : Datomic — 言語とデータベースの分離",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607032500-kotoba-kotobase-clojure-datomic-relationship.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/kotobase-peer, :jiten.link/kind :see-also}
+   {:jiten.link/to :entry/kotobase-engine, :jiten.link/kind :see-also}
+   {:jiten.link/to :entry/kotobase-net, :jiten.link/kind :see-also}]}
+ {:jiten.entry/id :entry/kotobase-peer,
+  :jiten.entry/title "kotobase-peer",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/kotobase-peer in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-peer-registered,
+      :jiten.statement/text
+      "`kotobase-peer` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/kotobase-peer`, pinned at commit `545d0866ebba`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/kotobase-peer-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/kotobase-peer` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/kotobase-peer, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/kotobase, :jiten.link/kind :part-of}]}
+ {:jiten.entry/id :entry/kotobase-engine,
+  :jiten.entry/title "kotobase-engine",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/kotobase-engine in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-engine-registered,
+      :jiten.statement/text
+      "`kotobase-engine` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/kotobase-engine`, pinned at commit `06897d42842c`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/kotobase-engine-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/kotobase-engine` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/kotobase-engine, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-engine-adr-1,
+      :jiten.statement/text
+      "ADR-2607265000 (status: accepted, 2026-07-26) records: ADR-2607265000: D1-backed Kotobase は Datomic の EDN 文法をそのまま公開する — 文法・引数順は互換、wire は非互換",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607265000-kotobase-d1-datomic-edn-api.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/kotobase, :jiten.link/kind :part-of}]}
+ {:jiten.entry/id :entry/innen,
+  :jiten.entry/title "innen",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/innen in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/innen-registered,
+      :jiten.statement/text
+      "`innen` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/innen`, pinned at commit `a45b03e4dfb1`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/innen-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/innen` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/innen, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/innen-adr-1,
+      :jiten.statement/text
+      "ADR-2607258500 (status: accepted, 2026-07-25) records: ADR-2607258500: 人類史スケールの依存関係を記録・照会する面を作る — kotoba-lang/innen（因縁）+ kotoba-lang/loop-innen",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607258500-innen-historical-dependency-record.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/jiten, :jiten.link/kind :see-also}
+   {:jiten.link/to :entry/loop-innen, :jiten.link/kind :see-also}]}
+ {:jiten.entry/id :entry/loop-innen,
+  :jiten.entry/title "loop-innen",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/loop-innen in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/loop-innen-registered,
+      :jiten.statement/text
+      "`loop-innen` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/loop-innen`, pinned at commit `aba48b62acbf`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/loop-innen-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/loop-innen` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/loop-innen, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/loop-innen-adr-1,
+      :jiten.statement/text
+      "ADR-2607258500 (status: accepted, 2026-07-25) records: ADR-2607258500: 人類史スケールの依存関係を記録・照会する面を作る — kotoba-lang/innen（因縁）+ kotoba-lang/loop-innen",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607258500-innen-historical-dependency-record.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/innen, :jiten.link/kind :see-also}]}
+ {:jiten.entry/id :entry/jiten,
+  :jiten.entry/title "jiten",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/jiten in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/jiten-registered,
+      :jiten.statement/text
+      "`jiten` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/jiten`, pinned at commit `8952a919b333`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/jiten-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/jiten` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/jiten, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/jiten-adr-1,
+      :jiten.statement/text
+      "ADR-2607299600 (status: accepted, 2026-07-29) records: ADR-2607299600: kotobase.net の EDN 百科事典は新 DB ではなく記事層 — kotoba-lang/jiten（事典）",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607299600-jiten-encyclopedia-entry-layer.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/innen, :jiten.link/kind :see-also}
+   {:jiten.link/to :entry/kotobase, :jiten.link/kind :see-also}]}
+ {:jiten.entry/id :entry/toshokan,
+  :jiten.entry/title "toshokan",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/kotoba-lang/toshokan in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/toshokan-registered,
+      :jiten.statement/text
+      "`toshokan` is registered in the workspace manifest as a west project at path `orgs/kotoba-lang/toshokan`, pinned at commit `06d1f36e79df`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/toshokan-github,
+      :jiten.statement/text
+      "The GitHub repository `kotoba-lang/toshokan` is public and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/kotoba-lang/toshokan, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/toshokan-adr-1,
+      :jiten.statement/text
+      "ADR-2607199900 (status: accepted) records: ADR-2607199900: kotoba-lang/toshokan — 国立図書館カタログの kotobase 保全（5法域中3法域を実装、2法域は spec-only）",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607199900-toshokan-national-library-catalog-ingestion.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/kotobase, :jiten.link/kind :see-also}]}
+ {:jiten.entry/id :entry/kotobase-net,
+  :jiten.entry/title "net-kotobase",
+  :jiten.entry/lang "en",
+  :jiten.entry/form :article,
+  :jiten.entry/topic-kind :artifact,
+  :jiten.entry/notability
+  {:jiten.notability/basis :workspace,
+   :jiten.notability/sources
+   ["com-junkawasaki/root manifest/west.yml @ 018a33518b9f"],
+   :jiten.notability/note
+   "Registered west project at orgs/network-awai/net-kotobase in com-junkawasaki/root manifest/west.yml."},
+  :jiten.entry/body
+  [{:jiten.section/id :registration,
+    :jiten.section/heading "Registration",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-net-registered,
+      :jiten.statement/text
+      "`net-kotobase` is registered in the workspace manifest as a west project at path `orgs/network-awai/net-kotobase`, pinned at commit `53f1ce3d82e2`.",
+      :jiten.statement/source
+      "com-junkawasaki/root manifest/west.yml @ 018a33518b9f",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/kotobase-net-github,
+      :jiten.statement/text
+      "The GitHub repository `network-awai/net-kotobase` is private and its default branch is `main`.",
+      :jiten.statement/source
+      "GitHub API repos/network-awai/net-kotobase, retrieved 2026-07-29",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}
+   {:jiten.section/id :decisions,
+    :jiten.section/heading "Recorded decisions",
+    :jiten.section/statements
+    [{:jiten.statement/id :s/kotobase-net-adr-1,
+      :jiten.statement/text
+      "ADR-2607261700 (status: accepted, 2026-07-26) records: ADR-2607261700: net-kotobase を「運用責任を誰が負うか」で分けた3プラン (p2p / secure-managed / enterprise) に再編する",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607261700-net-kotobase-three-plan-responsibility-structure.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}
+     {:jiten.statement/id :s/kotobase-net-adr-2,
+      :jiten.statement/text
+      "ADR-2607072430 (status: accepted) records: ADR-2607072430: net-kotobase web.*/geo.* -- webpage + maps search compiled onto the datomic.* plane",
+      :jiten.statement/source
+      "com-junkawasaki/root 90-docs/adr/2607072430-net-kotobase-web-geo-datalog-search.edn",
+      :jiten.statement/confidence :documented,
+      :jiten.statement/as-of "2026-07-29"}]}],
+  :jiten.entry/links
+  [{:jiten.link/to :entry/kotobase, :jiten.link/kind :see-also}]}]

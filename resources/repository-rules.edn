@@ -1,0 +1,21 @@
+;; Which workspace contract THIS repo claims to satisfy.
+;; Authority: com-junkawasaki/root manifest/repository-rules.edn (ADR-2607299000).
+
+{:schema "kotoba.repository-role-rules.v0"
+ :vocabulary/id :name-prefix
+ :prefix "loop-"
+ :role :continuous-orchestrator
+ :must [:observe :evaluate :decide :act :record-evidence]
+ :must-not [:own-domain-scoring-truth :bind-to-one-ci-provider]
+ :authority-library "kotoba-lang/jiten"
+
+ :declares
+ {:name "loop-jiten"
+  :owns ["ingest order and fail-closed refusal"
+         "the append-only cycle ledger"
+         "corpus files (the sourced claims themselves)"
+         "ranking of what to write next"]
+  :does-not-own ["admissibility — jiten.schema decides"
+                 "link semantics — jiten.link decides"
+                 "any statistic — jiten.core computes them"
+                 "storage — kotobase"]}}

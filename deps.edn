@@ -1,0 +1,4 @@
+{:paths ["src" "bin" "scripts" "resources"]
+ :deps {kotoba-lang/jiten {:local/root "../jiten"}}
+ :aliases
+ {:test {:extra-paths ["test"]}}}

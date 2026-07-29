@@ -1,0 +1,89 @@
+;; Seeds for the workspace corpus.
+;;
+;; A seed names a repo and the ADRs that are authoritative for it. It does NOT
+;; contain the claims — the ingest derives every statement from a record it
+;; reads at ingest time (manifest/west.yml, the ADR file itself, the GitHub
+;; API) and refuses to emit anything it could not read.
+;;
+;; `:expect` is the innen discipline applied here: the seed says what the
+;; resolved record must contain, and the ingest REJECTS a mismatch rather than
+;; taking whatever came back. Without it, a renamed or moved repo would be
+;; silently written up as if nothing had changed.
+;;
+;; What must never appear in this file: prose describing a repo. The moment a
+;; human writes "kotobase is a fast graph database" here, that sentence has no
+;; source and the whole record is worth less. Descriptions come from ADR titles,
+;; which are themselves records.
+
+{:seed-version 1
+ :dataset "jiten-workspace"
+ :lang "en"
+
+ :entries
+ [{:id :entry/kotobase
+   :repo "kotobase"
+   :title "kotobase"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/kotobase"
+   :adrs ["2607265000" "2607032500"]
+   :links [{:to :entry/kotobase-peer :kind :see-also}
+           {:to :entry/kotobase-engine :kind :see-also}
+           {:to :entry/kotobase-net :kind :see-also}]}
+
+  {:id :entry/kotobase-peer
+   :repo "kotobase-peer"
+   :title "kotobase-peer"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/kotobase-peer"
+   :adrs []
+   :links [{:to :entry/kotobase :kind :part-of}]}
+
+  {:id :entry/kotobase-engine
+   :repo "kotobase-engine"
+   :title "kotobase-engine"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/kotobase-engine"
+   :adrs ["2607265000"]
+   :links [{:to :entry/kotobase :kind :part-of}]}
+
+  {:id :entry/innen
+   :repo "innen"
+   :title "innen"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/innen"
+   :adrs ["2607258500"]
+   :links [{:to :entry/jiten :kind :see-also}
+           {:to :entry/loop-innen :kind :see-also}]}
+
+  {:id :entry/loop-innen
+   :repo "loop-innen"
+   :title "loop-innen"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/loop-innen"
+   :adrs ["2607258500"]
+   :links [{:to :entry/innen :kind :see-also}]}
+
+  {:id :entry/jiten
+   :repo "jiten"
+   :title "jiten"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/jiten"
+   :adrs ["2607299600"]
+   :links [{:to :entry/innen :kind :see-also}
+           {:to :entry/kotobase :kind :see-also}]}
+
+  {:id :entry/toshokan
+   :repo "toshokan"
+   :title "toshokan"
+   :topic-kind :artifact
+   :expect "orgs/kotoba-lang/toshokan"
+   :adrs ["2607199900"]
+   :links [{:to :entry/kotobase :kind :see-also}]}
+
+  {:id :entry/kotobase-net
+   :repo "net-kotobase"
+   :title "net-kotobase"
+   :topic-kind :artifact
+   :expect "orgs/network-awai/net-kotobase"
+   :adrs ["2607261700" "2607072430"]
+   :links [{:to :entry/kotobase :kind :see-also}]}]}
