@@ -7,9 +7,15 @@
 ;; keeps the key on this machine and lets each page state the exact `basis-t` it
 ;; was built from, which is more honest than an undated "live" view.
 ;;
-;; Every page is built from `kotoba-ui` shell components: no hand-written
-;; layout CSS, no raw hex outside the one theme map, typography only via the
-;; HIG text styles (kotoba-uiux contract; ADR-2607122200).
+;; Skinned with the Digital Agency design system (`jp-go-digital-design-system`,
+;; ADR-2607141915) rather than kotoba-ui: `dads-*` markup and the vendored
+;; upstream CSS, plus the repo's `dds-ext-*` layout helpers. No hand-written
+;; layout CSS and no raw hex in app code — every colour is a DADS token.
+;;
+;; DADS IS LIGHT-ONLY. Upstream ships no dark palette, and `jp-go-dds.page`
+;; declares `color-scheme: light` so the page renders light even when the OS is
+;; dark. That is a property of this skin, not an oversight (jp-go-dds.tokens
+;; says it plainly: an app that needs dark should choose the kotoba-ui skin).
 ;;
 ;;   nbb --classpath "<design-system src dirs>:../jiten/src:src" \
 ;;       scripts/render_site.cljs [--out dist] [--endpoint URL]
@@ -20,7 +26,9 @@
             ["path" :as path]
             [clojure.edn :as edn]
             [clojure.string :as str]
-            [kotoba-ui.core :as ui]
+            [css.core :as css]
+            [jp-go-dds.core :as dds]
+            [jp-go-dds.page :as dds-page]
             [loop-jiten.kotobase :as kb]))
 
 (def argv (vec *command-line-args*))
@@ -31,9 +39,43 @@
 (def endpoint (arg "--endpoint" "https://kotobase-storage-d1.aozora.app"))
 (def db-name (arg "--db" "jiten"))
 (def core-js (arg "--core" "../../network-awai/net-kotobase/worker/js/kotobase-core.js"))
+(def dds-css-path
+  (arg "--dds-css" "../jp-go-digital-design-system/resources/jp_go_dds/dds.css"))
 
-;; The only place a hex colour is legitimate in app code (rule 5).
-(def theme {:accent "#3B6EA5" :appearance :auto})
+(def page-css
+  "Vendored upstream DADS CSS followed by this repo's dds-ext-* layout rules.
+   Order matters: ext rules are additive and must come after."
+  (str (str (fs/readFileSync dds-css-path "utf8")) "\n" dds/ext-css))
+
+(def app-css
+  "The only app CSS on the site, and every value in it is a DADS token —
+   no raw hex, no font stack. Written as `[selector decls]` vectors through
+   `css.core` rather than a raw CSS string, the same convention jp-go-dds.skin
+   uses, so the declarations stay data."
+  (css/css
+   {:rules
+    [["body" {:background "var(--color-neutral-white)"
+              :color "var(--color-neutral-solid-gray-800)"}]
+     [".site-header" {:border-bottom "1px solid var(--color-neutral-solid-gray-200)"
+                      :padding-block "calc(16 / 16 * 1rem)"
+                      :margin-bottom "calc(24 / 16 * 1rem)"}]
+     [".site-header .dds-ext-row" {:justify-content "space-between"
+                                   :align-items "center"}]
+     [".site-brand" {:font-weight 700}]
+     [".lede" {:font-size "calc(20 / 16 * 1rem)"
+               :line-height 1.7
+               :color "var(--color-neutral-solid-gray-700)"
+               :margin-block "calc(8 / 16 * 1rem) calc(24 / 16 * 1rem)"}]
+     [".entry-meta" {:color "var(--color-neutral-solid-gray-600)"
+                     :margin-block "calc(8 / 16 * 1rem) calc(16 / 16 * 1rem)"}]
+     [".claim-text" {:margin-block 0 :line-height 1.8}]
+     ;; the citation is the point of the record, so it stays legible rather
+     ;; than being shrunk into a footnote
+     [".claim-source" {:color "var(--color-neutral-solid-gray-600)"
+                       :margin-block "calc(8 / 16 * 1rem) 0"
+                       :word-break "break-word"}]
+     [".red-link" {:color "var(--color-neutral-solid-gray-500)"}]
+     ["main" {:padding-bottom "calc(64 / 16 * 1rem)"}]]}))
 
 (defn- parse [{:keys [status body]} label]
   (when-not (= 200 status)
@@ -50,100 +92,109 @@
 
 ;; --- views ------------------------------------------------------------------
 
-(defn- nav []
-  (ui/nav-bar "事典 jiten" {:trailing [(ui/button "Source" {:attrs {:href "https://github.com/kotoba-lang/jiten"}})]}))
+(defn- site-header []
+  [:header {:class "site-header"}
+   (dds/container
+    [:div {:class "dds-ext-row"}
+     [:a {:class "dads-link site-brand" :href "/"} "事典 jiten"]
+     [:a {:class "dads-link" :href "https://github.com/kotoba-lang/jiten"} "Source"]])])
 
-(defn statement-item [{:keys [text source confidence]}]
-  (ui/panel
-   [[:p {:class "hig-body"} text]
-    [:p {:class "hig-caption1 claim-source"}
-     (ui/badge (name (or confidence :unknown))) " " source]]))
+(defn- provenance [basis extra]
+  (dds/notification-banner
+   {:type :info-1 :heading "Provenance"
+    :style "standard"}
+   [:p (str "Generated from a live kotobase query at basis-t " basis ". " extra)]))
+
+(defn claim-card [{:keys [text source confidence]}]
+  (dds/card
+   [:p {:class "claim-text"} text]
+   [:p {:class "claim-source"}
+    (dds/chip-label (name (or confidence :unknown))
+                    {:color (if (= :documented confidence) "blue" "gray")})
+    " " source]))
 
 (defn entry-page [{:keys [id title lang sections links notability basis]}]
-  (ui/->page
-   {:title (str title " — jiten") :theme theme
-    :description (str "Sourced encyclopedia entry for " title ".")}
-   (ui/app-shell
-    {:nav (nav)}
-    (ui/hero {:title title
-              :tagline (str lang " · " (count (mapcat :statements sections))
-                            " sourced claim(s)")})
-    (for [{:keys [heading statements]} sections]
-      (ui/section {:title heading :key (str heading)}
-        (ui/stack {:gap :3}
+  (dds-page/->page
+   {:title (str title " — 事典 jiten")
+    :description (str "Sourced encyclopedia entry for " title ".")
+    :lang "en" :css page-css :app-css app-css}
+   (site-header)
+   [:main
+    (dds/container
+     (dds/heading 1 title {:size "45"})
+     [:p {:class "entry-meta"}
+      (dds/chip-label lang {:color "gray"}) " "
+      (str (count (mapcat :statements sections)) " sourced claim(s)")]
+     (dds/divider)
+     (for [{:keys [heading statements]} sections]
+       (dds/section {:title heading}
+         (dds/stack
           (if (seq statements)
-            (map statement-item statements)
-            [[:p {:class "hig-callout"} "No claims recorded in this section."]]))))
-    (when notability
-      (ui/section {:title "Why this entry exists"}
-        (ui/panel [[:p {:class "hig-body"} notability]])))
-    (when (seq links)
-      (ui/section {:title "Links"}
-        (ui/stack {:gap :2}
+            (map claim-card statements)
+            [:p "No claims recorded in this section."]))))
+     (when notability
+       (dds/section {:title "Why this entry exists"}
+         (dds/card [:p notability])))
+     (when (seq links)
+       (dds/section {:title "Links"}
+         (dds/stack
           (for [{:keys [to kind resolved?]} links]
-            [:p {:class "hig-callout" :key (str to kind)}
-             (ui/badge (name kind)) " "
+            [:p (dds/chip-label (name kind) {:color "gray"}) " "
              (if resolved?
-               [:a {:href (str "/" (slug to))} (str to)]
-               [:span {:class "red-link"} (str to) " (not written yet)"])]))))
-    (ui/section {:title "Provenance"}
-      (ui/panel
-       [[:p {:class "hig-footnote"}
-         "Every claim above carries its own source. Generated from kotobase basis-t "
-         (str basis) ". Entry id " (str id) "."]])))))
+               [:a {:class "dads-link" :href (str "/" (slug to))} (str to)]
+               [:span {:class "red-link"} (str to) " — not written yet"])]))))
+     (dds/section {:title "Provenance"}
+       (provenance basis (str "Entry id " id ". Every claim above carries its own source."))))]))
 
 (defn index-page [{:keys [entries stats basis ref]}]
-  (ui/->page
-   {:title "事典 jiten — a sourced encyclopedia" :theme theme
-    :description "An encyclopedia whose claims are checkable by query rather than by convention."}
-   (ui/app-shell
-    {:nav (nav)}
-    (ui/hero {:title "事典 jiten"
-              :tagline "An encyclopedia whose claims are checkable by query rather than by convention."})
-    (ui/section {:title "The record" :wide true}
-      (ui/grid
-       (ui/panel [[:h3 (str (:entries stats))] [:p {:class "hig-callout"} "entries"]])
-       (ui/panel [[:h3 (str (:statements stats))] [:p {:class "hig-callout"} "sourced claims"]])
-       (ui/panel [[:h3 (str (:sources stats))] [:p {:class "hig-callout"} "distinct sources"]])
-       (ui/panel [[:h3 (str (:red-links stats))] [:p {:class "hig-callout"} "red links"]])))
-    (ui/section {:title "Entries" :wide true}
-      (ui/data-table
-       {:caption "Every entry in the corpus, with the number of claims it carries."
-        :columns [{:key :title :label "Entry"}
-                  {:key :lang :label "Language"}
-                  {:key :claims :label "Claims"}]
-        :rows (for [e entries]
-                {:title [:a {:href (str "/" (slug (:id e)))} (:title e)]
-                 :lang (:lang e)
-                 :claims (str (:claims e))})}))
-    (ui/section {:title "How to read this"}
-      (ui/stack {:gap :3}
-        (ui/panel
-         [[:h3 "Every claim carries a source"]
-          [:p {:class "hig-body"}
-           "The body of an entry is not prose with citations attached by convention — it is a
-            vector of statements, each with its own source and confidence. A statement without
-            a source is refused at build time, so unsourced prose is unrepresentable rather
-            than discouraged."]])
-        (ui/panel
-         [[:h3 "Red links are gaps, not faults"]
-          [:p {:class "hig-body"}
-           "A link to an entry that does not exist yet is recorded and shown. It is how the
-            record states what it is missing."]])
-        (ui/panel
-         [[:h3 "Nothing here rates its subject"]
-          [:p {:class "hig-body"}
-           "There is no attribute for a rating, rank, score or verdict on an entry's subject.
-            A record that ranks the things it describes has stopped being a record."]])))
-    (ui/section {:title "Provenance"}
-      (ui/panel
-       [[:p {:class "hig-footnote"}
-         "Generated from a live kotobase query at basis-t " (str basis) ". Ref " ref ". "
-         "Corpus and ingest: "]
-        [:p {:class "hig-footnote"}
-         [:a {:href "https://github.com/kotoba-lang/loop-jiten"} "kotoba-lang/loop-jiten"]
-         " · "
-         [:a {:href "https://github.com/kotoba-lang/jiten"} "kotoba-lang/jiten"]]])))))
+  (dds-page/->page
+   {:title "事典 jiten — a sourced encyclopedia"
+    :description "An encyclopedia whose claims are checkable by query rather than by convention."
+    :lang "en" :css page-css :app-css app-css}
+   (site-header)
+   [:main
+    (dds/container
+     (dds/heading 1 "事典 jiten" {:size "64"})
+     [:p {:class "lede"}
+      "An encyclopedia whose claims are checkable by query rather than by convention."]
+     (dds/divider)
+     (dds/section {:title "The record"}
+       (dds/grid {:min "12rem"}
+        (dds/card (dds/heading 3 (str (:entries stats)) {:size "32"}) [:p "entries"])
+        (dds/card (dds/heading 3 (str (:statements stats)) {:size "32"}) [:p "sourced claims"])
+        (dds/card (dds/heading 3 (str (:sources stats)) {:size "32"}) [:p "distinct sources"])
+        (dds/card (dds/heading 3 (str (:red-links stats)) {:size "32"}) [:p "red links"])))
+     (dds/section {:title "Entries"}
+       (dds/table
+        {:caption "Every entry in the corpus, with the number of claims it carries."
+         :headers ["Entry" "Language" "Claims"]
+         :row-header? true
+         :rows (for [e entries]
+                 [[:a {:class "dads-link" :href (str "/" (slug (:id e)))} (:title e)]
+                  (:lang e)
+                  (str (:claims e))])}))
+     (dds/section {:title "How to read this"}
+       (dds/stack
+        (dds/card
+         (dds/heading 3 "Every claim carries a source" {:size "20"})
+         [:p "The body of an entry is not prose with citations attached by convention — it is a
+              vector of statements, each with its own source and confidence. A statement without
+              a source is refused at build time, so unsourced prose is unrepresentable rather
+              than discouraged."])
+        (dds/card
+         (dds/heading 3 "Red links are gaps, not faults" {:size "20"})
+         [:p "A link to an entry that does not exist yet is recorded and shown. It is how the
+              record states what it is missing."])
+        (dds/card
+         (dds/heading 3 "Nothing here rates its subject" {:size "20"})
+         [:p "There is no attribute for a rating, rank, score or verdict on an entry's subject.
+              A record that ranks the things it describes has stopped being a record."])))
+     (dds/section {:title "Provenance"}
+       (provenance basis (str "Ref " ref "."))
+       [:p (str "Corpus and ingest: ")
+        [:a {:class "dads-link" :href "https://github.com/kotoba-lang/loop-jiten"} "kotoba-lang/loop-jiten"]
+        " · "
+        [:a {:class "dads-link" :href "https://github.com/kotoba-lang/jiten"} "kotoba-lang/jiten"]]))]))
 
 ;; --- run --------------------------------------------------------------------
 
