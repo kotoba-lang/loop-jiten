@@ -1,0 +1,16 @@
+{
+  // The generated site, served as static assets.
+  //
+  // Assets only — there is no Worker script and no binding, deliberately. A
+  // per-request proxy would have to carry the corpus signing key inside a
+  // deployed Worker; generating the pages locally from a live query keeps the
+  // key on the publisher's machine, and each page states the basis-t it was
+  // built from. `dist/` is a derived artifact of loop-jiten's cycle
+  // (`scripts/render_site.cljs`) — regenerate it, never edit it.
+  "name": "jiten",
+  "compatibility_date": "2026-07-29",
+  "workers_dev": true,
+  "assets": {
+    "directory": "dist"
+  }
+}
