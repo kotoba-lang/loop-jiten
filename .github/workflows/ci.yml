@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          cli: latest
+      - run: npm install -g nbb
+      # The repo ships test/run_tests.cljs and no :test alias with :main-opts,
+      # so `clojure -M:test` drops to a REPL. nbb over the :test classpath is
+      # how these run.
+      - run: nbb --classpath "$(clojure -A:test -Spath)" test/run_tests.cljs
