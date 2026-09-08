@@ -20,7 +20,7 @@
             ["node:buffer" :refer [Buffer]]
             ["node:crypto" :as crypto]
             ["path" :as path]
-            [clojure.string :as str]))
+            [kotoba.lang.text :as str]))
 
 (def keychain-service "kotobase:jiten-publisher")
 (def keychain-account "jiten")

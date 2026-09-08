@@ -1,5 +1,5 @@
 (ns loop-jiten.core-test
-  (:require ["fs" :as fs]
+  (:require [kotoba.lang.text] ["fs" :as fs]
             ["os" :as os]
             ["path" :as path]
             [clojure.test :refer [deftest is testing]]
@@ -75,7 +75,7 @@
     (fs/writeFileSync (path/join corpus-dir "a.edn") one-entry)
     (let [l1 (lj/cycle! {:dir corpus-dir :ledger-file ledger :report-file report :as-of "2026-07-29"})
           l2 (lj/cycle! {:dir corpus-dir :ledger-file ledger :report-file report :as-of "2026-07-30"})
-          lines (remove empty? (clojure.string/split-lines (str (fs/readFileSync ledger "utf8"))))]
+          lines (remove empty? (kotoba.lang.text/split-lines (str (fs/readFileSync ledger "utf8"))))]
       (is (= 1 (:jiten/seq l1)))
       (is (= 2 (:jiten/seq l2)))
       (is (= 2 (count lines)) "append-only: the first line must survive the second cycle")
