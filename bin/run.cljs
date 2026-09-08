@@ -4,7 +4,7 @@
 ;;   nbb --classpath "../jiten/src:src" bin/run.cljs [--as-of YYYY-MM-DD]
 (ns run
   (:require ["child_process" :as cp]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [loop-jiten.core :as loop-jiten]))
 
 (def argv (vec *command-line-args*))

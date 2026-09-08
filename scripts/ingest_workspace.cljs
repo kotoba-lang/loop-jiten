@@ -34,7 +34,7 @@
             ["node:process" :as process]
             [cljs.pprint]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [jiten.core :as j]
             [jiten.schema :as js]))
 

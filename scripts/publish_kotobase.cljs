@@ -27,7 +27,7 @@
             ["node:process" :as process]
             ["path" :as path]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [jiten.core :as j]
             [jiten.tx :as jtx]))
 

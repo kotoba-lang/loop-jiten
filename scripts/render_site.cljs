@@ -25,7 +25,7 @@
             ["node:process" :as process]
             ["path" :as path]
             [clojure.edn :as edn]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [css.core :as css]
             [jp-go-dds.core :as dds]
             [jp-go-dds.page :as dds-page]
