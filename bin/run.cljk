@@ -1,7 +1,7 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; One cycle. Writes target/loop-jiten-report.md and appends one ledger line.
 ;;
-;;   nbb --classpath "../jiten/src:src" bin/run.cljk [--as-of YYYY-MM-DD]
+;;   kbb --backend sci --classpath "../jiten/src:src" bin/run.cljk [--as-of YYYY-MM-DD]
 (ns run
   (:require ["child_process" :as cp]
             [kotoba.lang.text :as str]

@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; Render the live corpus into a static site.
 ;;
 ;; GENERATED, not proxied. A per-request proxy would have to carry the signing
@@ -17,7 +17,7 @@
 ;; dark. That is a property of this skin, not an oversight (jp-go-dds.tokens
 ;; says it plainly: an app that needs dark should choose the kotoba-ui skin).
 ;;
-;;   nbb --classpath "<design-system src dirs>:../jiten/src:src" \
+;;   kbb --backend sci --classpath "<design-system src dirs>:../jiten/src:src" \
 ;;       scripts/render_site.cljk [--out dist] [--endpoint URL]
 
 (ns render-site
