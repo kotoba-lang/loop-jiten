@@ -82,14 +82,14 @@ record-evidence  append exactly one line to ledger/loop-jiten-ledger.edn
 
 ```bash
 # derive the corpus from the workspace's own records
-nbb --classpath "../jiten/src:src" scripts/ingest_workspace.cljs \
+nbb --classpath "../jiten/src:src" scripts/ingest_workspace.cljk \
     --root /path/to/superproject           # [--no-github] [--as-of YYYY-MM-DD]
 
 # one cycle: report + one ledger line
-nbb --classpath "../jiten/src:src" bin/run.cljs
+nbb --classpath "../jiten/src:src" bin/run.cljk
 
 # tests
-nbb --classpath "../jiten/src:src:test" test/run_tests.cljs   # 7 tests, 23 assertions
+nbb --classpath "../jiten/src:src:test" test/run_tests.cljk   # 7 tests, 23 assertions
 ```
 
 ## The ledger is not a document
