@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; Derive a 事典 corpus from records this workspace already keeps.
 ;;
 ;; Every statement emitted here is mechanically derived from a file or an API
@@ -24,7 +24,7 @@
 ;; not be read (`:node/1973-oil-crisis` — a keyword may not start with a digit).
 ;;
 ;; Usage:
-;;   nbb --classpath "../jiten/src:src" scripts/ingest_workspace.cljk \
+;;   kbb --backend sci --classpath "../jiten/src:src" scripts/ingest_workspace.cljk \
 ;;       --root /path/to/superproject [--out corpus/workspace-YYYY-MM-DD.edn] [--no-github]
 
 (ns ingest-workspace

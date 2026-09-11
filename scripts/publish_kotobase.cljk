@@ -1,4 +1,4 @@
-#!/usr/bin/env nbb
+#!/usr/bin/env kbb
 ;; Publish the 事典 corpus to a live kotobase ref, then query it back.
 ;;
 ;; Auth is a self-minted CACAO (the workspace's actor convention): the ref is
@@ -13,7 +13,7 @@
 ;; readable twice. The secret lives in the macOS Keychain under one known
 ;; service name and is fetched by that name only.
 ;;
-;;   nbb --classpath "../jiten/src:src" scripts/publish_kotobase.cljk \
+;;   kbb --backend sci --classpath "../jiten/src:src" scripts/publish_kotobase.cljk \
 ;;       [--endpoint URL] [--db jiten] [--dry-run]
 
 (ns publish-kotobase
