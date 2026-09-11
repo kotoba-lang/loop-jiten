@@ -13,7 +13,7 @@
 ;; readable twice. The secret lives in the macOS Keychain under one known
 ;; service name and is fetched by that name only.
 ;;
-;;   nbb --classpath "../jiten/src:src" scripts/publish_kotobase.cljs \
+;;   nbb --classpath "../jiten/src:src" scripts/publish_kotobase.cljk \
 ;;       [--endpoint URL] [--db jiten] [--dry-run]
 
 (ns publish-kotobase

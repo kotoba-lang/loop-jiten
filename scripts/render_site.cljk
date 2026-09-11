@@ -18,7 +18,7 @@
 ;; says it plainly: an app that needs dark should choose the kotoba-ui skin).
 ;;
 ;;   nbb --classpath "<design-system src dirs>:../jiten/src:src" \
-;;       scripts/render_site.cljs [--out dist] [--endpoint URL]
+;;       scripts/render_site.cljk [--out dist] [--endpoint URL]
 
 (ns render-site
   (:require ["fs" :as fs]
